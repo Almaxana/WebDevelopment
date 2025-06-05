@@ -1,0 +1,90 @@
+Order
+
+mutation CreateOrder {
+  createOrder(input: {
+    authorId: 10,
+    dishIds: [6, 7, 8]
+  }) {
+    id
+    status
+    author {
+      id
+      firstName
+    }
+    dishes {
+      id
+      name
+      price
+    }
+    createdAt
+  }
+}
+
+query GetAllOrders {
+  orders {
+    id
+    status
+    author {
+      id
+      firstName
+    }
+    dishes {
+      id
+      name
+    }
+    createdAt
+  }
+}
+
+query GetOrder {
+  order(id: 1) {
+    id
+    status
+    author {
+      id
+      firstName
+      lastName
+    }
+    dishes {
+      id
+      name
+      price
+    }
+    createdAt
+  }
+}
+
+mutation UpdateOrder {
+  updateOrder(
+    id: 5,
+    input: {
+      dishIds: [6, 7],
+      authorId: 10
+    }
+  ) {
+    id
+    dishes {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteOrder {
+  removeOrder(id: 5)
+}
+
+query GetPaginatedOrders {
+  ordersPaginated(page: 1, limit: 5) {
+    data {
+      id
+      status
+      author {
+        id
+        firstName
+      }
+      createdAt
+    }
+    total
+  }
+}

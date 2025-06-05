@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+{{> head
+  title="Login"
+  styleSheets='<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+                 <link rel="stylesheet" href="/css/BrowserReset.css">
+                 <link rel="stylesheet" href="/extraPagesCSS/Login.css">'
+description="Вход в ЛК ресторана европейской кухни в Санкт-Петербурге MyRest"
+keywords="Вход в ЛК, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+scripts='<script src="/JS/GetActiveElement.js"></script> {{!-- Убедитесь, что путь к JS верный --}}'
+}}
+
+<body class="page">
+{{> header }}
+
+<main class="main-content">
+  {{> userOptionList }}
+
+  <section class="main-content__login_form grid_item">
+
+    <div id="firebaseui-auth-container"></div>
+
+    <div id="loader" style="display: none; text-align: center; margin-top: 20px; font-style: italic;">Загрузка...</div>
+
+    <div id="error-message" style="color: red; text-align: center; margin-top: 15px; font-weight: bold; min-height: 1.2em;"></div>
+
+  </section>
+
+
+</main>
+
+{{> footer }}
+
+
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+
+
+<script>
+  // Получаем конфиг Firebase, переданный из NestJS контроллера
+  const firebaseConfig = {{{json firebaseConfig}}}; // Используем тройные скобки и хелпер json
+
+  // Проверка, что конфиг получен
+  if (!firebaseConfig || !firebaseConfig.apiKey) {
+    console.error("Firebase config is missing or invalid!");
+    document.getElementById('error-message').textContent = 'Ошибка конфигурации. Невозможно загрузить форму входа.';
+  } else {
+    try {
+      // Инициализируем Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // FirebaseUI config.
+      const uiConfig = {
+        callbacks: {
+          signInFailure: function(error) {
+            console.error('Sign-in error details:', error);
+            alert('Ошибка входа: ' + error.message);
+            return Promise.resolve();
+          },
+          // Вызывается при успешном входе
+          signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+            console.log('Sign-in successful!', authResult);
+            document.getElementById('error-message').textContent = ''; // Очищаем предыдущие ошибки
+            const user = authResult.user;
+            // Получаем ID Token
+            user.getIdToken().then(function(idToken) {
+              console.log('Got ID Token');
+
+              // Показываем лоадер
+              document.getElementById('firebaseui-auth-container').style.display = 'none';
+              document.getElementById('loader').textContent = 'Проверка на сервере...';
+              document.getElementById('loader').style.display = 'block';
+
+
+              fetch('/auth/verify', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ idToken: idToken }),
+              })
+                .then(response => {
+                  if (!response.ok) {
+                    // Ошибка от бэкенда
+                    return response.json().then(err => {
+                      const errorMsg = err.message || `Ошибка сервера: ${response.status}`;
+                      throw new Error(errorMsg);
+                    });
+                  }
+                  return response.json(); // Ожидаем JSON с redirectUrl
+                })
+                .then(data => {
+                  console.log('Backend verification successful:', data);
+                  if (data.redirectUrl) {
+                    window.location.assign(data.redirectUrl); // Редирект
+                  } else {
+                    console.warn('Backend did not provide redirectUrl, redirecting to /dashboard');
+                    window.location.assign('/dashboard'); // Фоллбэк
+                  }
+                })
+                .catch(error => {
+                  console.error('Error during token verification:', error);
+                  document.getElementById('error-message').textContent = 'Ошибка входа: ' + error.message;
+                  document.getElementById('firebaseui-auth-container').style.display = 'block';
+                  document.getElementById('loader').style.display = 'none';
+                });
+            }).catch(function(error){
+              console.error('Error getting ID token:', error);
+              document.getElementById('error-message').textContent = 'Не удалось получить токен аутентификации.';
+              document.getElementById('loader').style.display = 'none';
+              document.getElementById('firebaseui-auth-container').style.display = 'block';
+            });
+
+            return false;
+          },
+          uiShown: function() {
+            document.getElementById('loader').style.display = 'none';
+          }
+        },
+        signInFlow: 'popup',
+        signInOptions: [
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID, // если нужен
+        ],
+      };
+
+
+      const ui = new firebaseui.auth.AuthUI(firebase.auth());
+      ui.start('#firebaseui-auth-container', uiConfig);
+
+    } catch (e) {
+      console.error("Error initializing Firebase or FirebaseUI:", e);
+      document.getElementById('error-message').textContent = 'Ошибка инициализации формы входа.';
+    }
+  }
+</script>
+</body>
+</html>

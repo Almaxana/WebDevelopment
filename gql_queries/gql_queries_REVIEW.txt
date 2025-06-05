@@ -1,0 +1,65 @@
+Review
+
+mutation CreateReview {
+  createReview(input: {
+    content: "Отличный сервис 2!",
+    author: 10
+  }) {
+    id
+    content
+    author {
+      id
+      firstName
+    }
+  }
+}
+
+query GetAllReviews {
+  reviews {
+    id
+    content
+    author {
+      id
+      firstName
+    }
+  }
+}
+
+query GetReviewById {
+  review(id: 1) {
+    id
+    content
+    author {
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+mutation UpdateReview {
+  updateReview(id: 1, input: {
+    content: "New Content"
+  }) {
+    id
+    content
+  }
+}
+
+mutation RemoveReview {
+  removeReview(id: 1)
+}
+
+query PaginatedReviews {
+  paginatedReviews(page: 3, limit: 2) {
+    data {
+      id
+      content
+      author {
+        id
+      }
+    }
+    total
+  }
+}
+

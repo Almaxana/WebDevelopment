@@ -1,0 +1,12 @@
+<li class="header__come-in-options-list__item">
+  <a href="SignIn">
+    {{#if status}}
+      <p>
+      <form action="/auth/logout" method="GET" style="display: inline; margin: 0; padding: 0; background: none; border: 2px; font: inherit; color: inherit;">
+      <button type="submit" class="logout-button">Выход</button>
+    </form>
+      </p>
+    {{else}}
+    {{/if}}
+  </a>
+</li>

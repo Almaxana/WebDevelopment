@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+  {{> head
+    title="SignIn"
+    styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                 <link rel="stylesheet" href="../extraPagesCSS/SignIn.css">'
+    description="Регистрация на сайте ресторана европейской кухни в Санкт-Петербурге MyRest"
+    keywords="Регистрация на сайте, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+    scripts='<script src="../../JS/GetActiveElement.js"></script>'
+  }}
+
+  <body class="page">
+  {{> header }}
+  <main class="main-content">
+      {{> userOptionList }}
+      <section class="main-content__signIn_form grid_item">
+          Некоторая форма регистрации
+      </section>
+
+  </main>
+
+  {{> footer }}
+  </body>
+</html>

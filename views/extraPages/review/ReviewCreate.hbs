@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+{{> head
+  title="Reviews"
+  styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                   <link rel="stylesheet" href="../../extraPagesCSS/Reviews.css">'
+  description="Отзывы о ресторане европейской кухни в Санкт-Петербурге MyRest"
+  keywords="Отзывы, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+  scripts='<script src="../../JS/Fetch.js"></script>
+            <script src="../../JS/Review/ReviewCreate.js" defer></script>'
+}}
+<body class="page">
+{{> header }}
+<main>
+<section class="main-content">
+  {{> userOptionList }}
+  <section>
+    <section class="grid_item" >
+      <textarea style="width: 80%; height: 80%;" id="content" name="content"></textarea>
+      <input style="margin-left: 1%" type="number" name="user" id="user">
+    </section>
+    <button id="submitButton" class="review_button grid_item" type="button">
+      <a href="/review/all">Создать</a>
+    </button>
+  </section>
+</section>
+
+</main>
+
+{{> footer }}
+</body>
+</html>

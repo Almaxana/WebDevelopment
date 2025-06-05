@@ -1,0 +1,55 @@
+User
+
+mutation {
+  createUser(input: {
+    firstName: "Vasily",
+    lastName: "Petrov",
+    role: GUEST
+  }) {
+    id
+    firstName
+    lastName
+  }
+}
+
+mutation {
+  updateUser(id: 17, input: {
+    firstName: "НовоеИмя",
+    lastName: "НоваяФамилия",
+    role: ADMIN
+  }) {
+    id
+    firstName
+    lastName
+  }
+}
+
+query {
+  user(id: 18) {
+    id
+    firstName
+    lastName
+    role
+    orders{
+      id
+    }
+    reviews{
+      id
+    }
+  }
+}
+
+query {
+  usersPaginated(page: 1, limit: 5) {
+    data {
+      id
+      firstName
+    }
+    total
+  }
+}
+
+mutation {
+  removeUser(id: 1)
+}
+

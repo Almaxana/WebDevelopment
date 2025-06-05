@@ -1,0 +1,19 @@
+@import "ExtraPageTemplate.css";
+.main-content__signIn_form {
+    grid-area: 1 / 1 / span 1 / span 1;
+}
+.active {
+    background-color: brown;
+}
+
+@media only screen  and (max-width: 700px)  {
+    .main-content__signIn_form {
+        font-size: 100%;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1500px) {
+    .main-content__signIn_form {
+        font-size: 150%;
+    }
+}

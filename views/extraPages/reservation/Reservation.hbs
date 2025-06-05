@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+{{> head
+  title="Reservations"
+  styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                 <link rel="stylesheet" href="../../extraPagesCSS/Menu.css">
+                 <link rel="stylesheet" href="../../extraPagesCSS/Booking.css">'
+  description="Меню ресторана европейской кухни в Санкт-Петербурге MyRest"
+  keywords="Меню, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+  scripts='<script src="../../JS/GetActiveElement.js"></script>
+            <script src="../../JS/Reservation/DeleteReservation.js" defer></script>'
+}}
+<body class="page">
+{{> header }}
+<main class="main-content">
+  {{> userOptionList }}
+  <section class="main-content__menu_table" >
+    <table class="main-content__menu_table">
+      <caption class="menu__title">Бронь</caption>
+      <thead class="menu__header">
+      <tr class="menu__row">
+        <th  class="menu__item menu__column-header">Номер столика</th>
+        <th class="menu__item menu__column-header">На кого</th>
+        <th  class="menu__item menu__column-header">Дата, время</th>
+      </tr>
+      </thead>
+      <tbody class="menu__body">
+        <tr class="menu__row">
+          <td class="menu__item menu__row-header">{{ reservation.tableNumber }}</td>
+          <td class="menu__item"><a href="/user/{{ reservation.user.id }}">{{ reservation.user.id }}</a></td>
+          <td class="menu__item">{{ reservation.reservationTime }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+    <button class="reservation_button" type="button">
+      <a href="/reservation/update/{{ reservation.id }}">Изменить</a>
+    </button>
+    <button id="deleteButton" class="reservation_button" type="button" data-id="{{ reservation.id }}">
+      <a href="/reservation/all">Удалить</a>
+    </button>
+  </section>
+</main>
+{{> footer }}
+</body>
+</html>

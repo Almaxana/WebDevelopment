@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+    {{> head
+      title="Gallery"
+      styleSheets='<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+                    <link rel="stylesheet" href="../extraPagesCSS/Gallery.css">
+                    <link rel="stylesheet" href="../../CSS/BrowserReset.css">'
+      description="Галерея ресторана европейской кухни в Санкт-Петербурге MyRest"
+      keywords="Галерея, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+    }}
+    <body class="page">
+    {{> header }}
+    <main class="main-content">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../../images/1.jpg"></div>
+                <div class="swiper-slide"><img src="../../images/2.jpg"></div>
+                <div class="swiper-slide"><img src="../../images/3.jpg"></div>
+                <div class="swiper-slide"><img src="../../images/4.jpg"></div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+        <!-- библиотека Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".mySwiper", { //создаю новый объект Swiper, задаю кнопки "назад" и "вперед"
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+        </script>
+
+    </main>
+
+    {{> footer }}
+    </body>
+</html>

@@ -1,0 +1,109 @@
+@import "ExtraPageTemplate.css";
+
+.order_author {
+    margin-top: 2%;
+}
+.dish_button {
+    height: 8%;
+    width: 100%;
+    background-color: antiquewhite;
+    margin-top: 1%;
+}
+.dish_button:hover {
+    background-color: #eed7b8;
+    cursor: pointer;
+}
+.menu__title {
+    font-weight: bold;
+    padding: 1%;
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+.main-content__menu_table {
+    width: 100%;
+}
+.main-content {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.main-content__rest-options-container {
+    grid-area: 2 / 1 / span 1 / span 1;
+}
+.active {
+    background-color: brown;
+}
+.menu__title {
+    font-size: 300%;
+}
+.menu__header {
+    height: 10%;
+}
+
+.menu__item {
+    border: 3px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 300%;
+}
+.menu__column-header {
+    font-weight: bold;
+    font-size: 200%;
+}
+.menu__row-header {
+    font-weight: bold;
+}
+.menu__row-header:hover {
+    color: brown;
+}
+.menu__body .menu__row:nth-child(odd) {
+    background-color: antiquewhite;
+}
+.menu__header .menu__row {
+    background-color: #f3d18d;
+}
+
+
+@media only screen  and (max-width: 700px)  {
+    .main-content__menu_table {
+        width: 100%;
+        height: 100%;
+    }
+    .menu__title {
+        font-size: 100%;
+    }
+
+    .menu__item {
+        font-size: 100%;
+    }
+    .menu__column-header {
+        font-size: 100%;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1500px) {
+    .menu__title {
+        font-size: 100%;
+    }
+    .menu__item {
+        font-size: 100%;
+    }
+    .menu__column-header {
+        font-size: 90%;
+    }
+
+}
+
+@media only screen  and (min-width: 1500px) and (max-width: 2200px) {
+    .menu__title {
+        font-size: 200%;
+    }
+
+    .menu__item {
+        font-size: 200%;
+    }
+    .menu__column-header {
+        font-size: 200%;
+    }
+}
+
+

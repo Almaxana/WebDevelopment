@@ -1,0 +1,76 @@
+Reservation
+
+mutation CreateReservation {
+  createReservation(input: {
+    userId: 10,
+    tableNumber: 8,
+    reservationTime: "2023-10-10T19:00:00"
+  }) {
+    id
+    tableNumber
+    user {
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+query GetAllReservations {
+  reservations {
+    id
+    tableNumber
+    reservationTime
+    user {
+      id
+      firstName
+    }
+  }
+}
+
+query GetReservation {
+  reservation(id: 1) {
+    id
+    tableNumber
+    user {
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+mutation UpdateReservation {
+  updateReservation(
+    id: 1,
+    input: {
+      userId: 10
+      tableNumber: 100,
+      reservationTime: "2023-10-10T19:00:00"
+    }
+  ) {
+    id
+    tableNumber
+    reservationTime
+  }
+}
+
+mutation DeleteReservation {
+  removeReservation(id: 1)
+}
+
+query GetPaginatedReservations {
+  paginatedReservations(page: 1, limit: 5) {
+    data {
+      id
+      tableNumber
+      reservationTime
+      user {
+        id
+        firstName
+      }
+    }
+    total
+  }
+}
+

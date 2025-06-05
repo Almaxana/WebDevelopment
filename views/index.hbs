@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {{> head
+    title="MyRest"
+    styleSheets='<link rel="stylesheet" href="CSS/main.css">
+                 <link rel="stylesheet" href="../../CSS/BrowserReset.css">'
+    description="Ресторан европейской кухни в Санкт-Петербурге MyRest"
+    keywords="MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+  }}
+
+  <body class="page">
+  {{> header }}
+  <main class="main-content">
+    <div id="notifications" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
+    <nav class="main-content__rest-options-container" id="main_menu">
+      <ul class="main-content__rest-user-options-list">
+        {{> userOption href="/dish/Menu" text="Меню" }}
+        {{> userOption href="/reservation/all" text="Бронь" }}
+        {{> userOption href="/order/all" text="Доставка" }}
+      </ul>
+    </nav>
+    <a href="Gallery" class="main-content__main-photo grid_item">
+      <img  src="images/main_img.jpg" alt="main_photo" class="main-content__main-photo grid_item">
+    </a>
+    <aside class="main-content_news grid_item">
+      <h3 class="main-content__greed-item-header">
+        News
+      </h3>
+      <p>
+        Мы по традиции одними из первых открываем <b>летнюю веранду</b>, признанную одной из самых лучших в городе.
+        Атмосфера безмятежности и покоя в окружении растений и цветов в сочетании с высокой гастрономией именитого шеф-повара
+      </p>
+    </aside>
+    <article class="main-content__description grid_item">
+      <h2 class="main-content__greed-item-header">
+        О ресторане MyRest
+      </h2>
+      <p>
+        Уютное место. Мы гордимся тем, что создаем для вас особую атмосферу,
+        сочетающую домашний комфорт и элегантный стиль. Наш ресторан – идеальное
+        место для дружеских встреч, романтических ужинов и семейных торжеств
+      </p>
+      <p>
+        Шеф-повар с многолетним опытом работы в лучших ресторанах Европы создает блюда,
+        вдохновленные аутентичными рецептами, сохраняя при этом творческий подход к каждому ингредиенту.
+        Мы используем только свежие и высококачественные продукты, чтобы каждый визит в MyRest стал для вас маленьким праздником
+      </p>
+    </article>
+    <section class="main-content__extra-info-container grid_item">
+      {{> extraInfoList listTopic="Кухня" list='<li> Русская кухня </li>
+                                                <li> Итальянская кухня </li>
+                                                <li> Французская кухня </li>'}}
+
+      {{> extraInfoList listTopic="Кулинарные премии" list='<li> The World’s 50 Best Restaurants </li>
+                                                            <li> <strong> Звезда Мишлен </strong> </li>
+                                                            <li> Премия Taittinger </li>'}}
+    </section>
+
+    {{> extraNav class="main-content__reviews grid_item" href="/review/all" text="Отзывы"}}
+    {{> extraNav class="main-content__extra-links grid_item" href="DishesWishList" text="WishList"}}
+
+  </main>
+
+  {{> footer }}
+
+
+  </body>
+</html>

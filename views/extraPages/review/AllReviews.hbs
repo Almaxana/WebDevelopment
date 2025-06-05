@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+  {{> head
+    title="Reviews"
+    styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                   <link rel="stylesheet" href="../extraPagesCSS/Reviews.css">
+                   <link rel="stylesheet" href="../../extraPagesCSS/Menu.css">'
+    description="Отзывы о ресторане европейской кухни в Санкт-Петербурге MyRest"
+    keywords="Отзывы, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+    scripts='<script src="../../JS/Fetch.js"></script>'
+  }}
+  <body class="page">
+  {{> header }}
+  <main class="main-content">
+    {{> userOptionList }}
+    <section class="main-content__menu_table" >
+      <table class="main-content__menu_table">
+        <caption class="menu__title">Все отзывы</caption>
+        <thead class="menu__header">
+        <tr class="menu__row">
+          <th class="menu__item menu__column-header">Автор</th>
+          <th  class="menu__item menu__column-header">Содержание</th>
+        </tr>
+        </thead>
+        <tbody class="menu__body">
+        {{#each reviews}}
+          <tr class="menu__row">
+            <td class="menu__item"><a href="/user/{{ this.author.id }}">{{ this.author.id }}</a> </td>
+            <td class="menu__item menu__row-header"><a href="/review/{{this.id}}">{{ truncate this.content 50 }}</a></td>
+          </tr>
+        {{/each}}
+        </tbody>
+
+      </table>
+      <button class="dish_button" type="button">
+        <a href="/review/create">Новый отзыв</a>
+      </button>
+    </section>
+  </main>
+
+  {{> footer }}
+  </body>
+</html>

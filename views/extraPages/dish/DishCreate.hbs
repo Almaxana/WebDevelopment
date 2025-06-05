@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+{{> head
+  title="Menu"
+  styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                 <link rel="stylesheet" href="../../extraPagesCSS/Menu.css">'
+  description="Меню ресторана европейской кухни в Санкт-Петербурге MyRest"
+  keywords="Меню, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+  scripts='<script src="../../JS/GetActiveElement.js"></script>
+            <script src="../../JS/Dish/CreateDish.js" defer></script>'
+}}
+<body class="page">
+{{> header }}
+<main class="main-content">
+  {{> userOptionList }}
+  <section class="main-content__menu_table" >
+    <table id="editableTable" class="main-content__menu_table">
+      <thead class="menu__header">
+      <tr class="menu__row">
+        <th class="menu__item menu__column-header">Блюдо</th>
+        <th  class="menu__item menu__column-header">Белки</th>
+        <th  class="menu__item menu__column-header">Жиры</th>
+        <th  class="menu__item menu__column-header">Углеводы</th>
+        <th  class="menu__item menu__column-header">Граммы</th>
+        <th  class="menu__item menu__column-header">Цена</th>
+      </tr>
+      </thead>
+      <tbody class="menu__body">
+      <tr id="row_to_add" class="menu__row">
+        <td class="menu__item menu__row-header"><input type="text" name="name"></td>
+        <td class="menu__item"><input type="text" name="protein"></td>
+        <td class="menu__item"><input type="text" name="fat"></td>
+        <td class="menu__item"><input type="text" name="carbohydrates"></td>
+        <td class="menu__item"><input type="text" name="grams"></td>
+        <td class="menu__item"><input type="text" name="price"></td>
+      </tr>
+      </tbody>
+
+    </table>
+    <button id="submitButton" class="dish_button" type="button">
+      <a href="/dish/Menu">Добавить блюдо</a>
+    </button>
+  </section>
+</main>
+{{> footer }}
+</body>
+
+</html>

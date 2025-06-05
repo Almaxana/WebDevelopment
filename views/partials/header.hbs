@@ -1,0 +1,18 @@
+<header class="header">
+  <img class="header__logo" src="/images/logo.jpg" width="120" height="auto" alt="logo">
+
+  <h1 class="header__title">
+    <a href="/">MyRest</a>
+  </h1>
+  <nav class="header__come-in-options-container">
+    <ul class="header__come-in-options-list">
+      <li class="header__come-in-options-list__item">
+        <a href="/auth/login">Вход в ЛК</a>
+      </li>
+      <li class="header__come-in-options-list__item">
+        <a href="/user/all">Пользователи</a>
+      </li>
+      {{> session status=status }}
+    </ul>
+  </nav>
+</header>

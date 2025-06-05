@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {{> head
+    title="DishesWishList"
+    styleSheets='<link rel="stylesheet" href="../extraPagesCSS/DishesWishList.css">'
+    description="WishList блюд для ресторана европейской кухни в Санкт-Петербурге MyRest"
+    keywords="WishList, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+    scripts='<script src="../../JS/DishesWishList.js" defer></script>'
+  }}
+
+  <body class="page">
+  <header class="header">
+    <img class="header__logo" src="../../images/logo.jpg" width="120" height="auto" alt="logo">
+    <h1 class="header__title">
+      <a href="/">MyRest</a>
+    </h1>
+  </header>
+  <main>
+    <form onsubmit="newItem()">
+      <div id="wish_list" class="wish_list_header">
+        <h2>MyRest Dishes Wish List</h2>
+        <label for="wish_list__new_item"></label><input type="text" id="wish_list__new_item">
+        <input class="addButton" type="submit" value="Add">
+      </div>
+
+      <ul id="wish_list_items_storage">
+        <li class="wish_list__item">Pasta</li>
+        <li class="checked wish_list__item ">Stake</li>
+      </ul>
+    </form>
+    <form onsubmit="loadFromLocalStorage()">
+      <button class="loadButton" type="submit">Load History</button>
+    </form>
+
+  </main>
+
+  <footer class="footer_content">
+    <p>
+      г. Санкт-Петербург, ул. Московская, 1
+    </p>
+  </footer>
+
+  </body>
+</html>

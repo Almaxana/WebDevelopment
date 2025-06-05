@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+{{> head
+  title="Reserations"
+  styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                 <link rel="stylesheet" href="../../extraPagesCSS/Menu.css">'
+  description="Меню ресторана европейской кухни в Санкт-Петербурге MyRest"
+  keywords="Меню, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+  scripts='<script src="../../JS/GetActiveElement.js"></script>'
+}}
+<body class="page">
+{{> header }}
+<main class="main-content">
+  {{> userOptionList }}
+  <section class="main-content__menu_table" >
+    <table class="main-content__menu_table">
+      <caption class="menu__title">Бронь</caption>
+      <thead class="menu__header">
+      <tr class="menu__row">
+        <th  class="menu__item menu__column-header">Номер столика</th>
+        <th class="menu__item menu__column-header">На кого</th>
+        <th  class="menu__item menu__column-header">Дата, время</th>
+      </tr>
+      </thead>
+      <tbody class="menu__body">
+      {{#each reservations}}
+        <tr class="menu__row">
+          <td class="menu__item menu__row-header"><a href="/reservation/{{this.id}}">{{ this.tableNumber }}</a></td>
+          <td class="menu__item"><a href="/user/{{ this.user.id }}">{{ this.user.id }}</a></td>
+          <td class="menu__item">{{ this.reservationTime }}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+
+    </table>
+    <button class="dish_button" type="button">
+      <a href="/reservation/create">Создать бронь</a>
+    </button>
+  </section>
+</main>
+{{> footer }}
+</body>
+</html>

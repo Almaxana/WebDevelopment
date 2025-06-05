@@ -1,0 +1,231 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Reservation {
+  id: Int!
+  user: User!
+  tableNumber: Int!
+  reservationTime: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Review {
+  id: Int!
+
+  """Содержимое отзыва"""
+  content: String!
+
+  """Автор отзыва"""
+  author: User!
+}
+
+type User {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  reviews: [Review!]
+  orders: [Order!]
+  reservations: [Reservation!]
+  role: UserRole!
+}
+
+enum UserRole {
+  GUEST
+  ADMIN
+}
+
+type Order {
+  id: Int!
+  author: User!
+  dishes: [Dish!]!
+  status: OrderStatus!
+  createdAt: DateTime!
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+type Dish {
+  id: Int!
+  name: String!
+  protein: Int!
+  fat: Int!
+  carbohydrates: Int!
+  price: Int!
+  grams: Int!
+  order: Order
+}
+
+type PaginatedDishes {
+  data: [Dish!]!
+  total: Float!
+}
+
+type PaginatedUsers {
+  data: [User!]!
+  total: Float!
+}
+
+type PaginatedOrders {
+  data: [Order!]!
+  total: Float!
+}
+
+type PaginatedReview {
+  data: [Review!]!
+  total: Int!
+}
+
+type PaginatedReservation {
+  data: [Reservation!]!
+  total: Int!
+}
+
+type Query {
+  dishes: [Dish!]!
+  dish(id: Int!): Dish
+  dishesByIds(ids: [Int!]!): [Dish!]!
+  freeDishes: [Dish!]!
+  dishesPaginated(page: Int! = 1, limit: Int! = 10): PaginatedDishes!
+  orders: [Order!]!
+  order(id: Int!): Order!
+  ordersPaginated(page: Int! = 1, limit: Int! = 10): PaginatedOrders!
+  users: [User!]!
+  user(id: Int!): User!
+  usersPaginated(page: Int! = 1, limit: Int! = 10): PaginatedUsers!
+  reviews: [Review!]!
+  review(id: Int!): Review!
+  paginatedReviews(page: Int = 1, limit: Int = 10): PaginatedReview!
+  reservations: [Reservation!]!
+  reservation(id: Int!): Reservation!
+  paginatedReservations(page: Int = 1, limit: Int = 10): PaginatedReservation!
+}
+
+type Mutation {
+  createDish(input: CreateDishDto!): Dish!
+  updateDish(id: Int!, input: UpdateDishDto!): Dish!
+  removeDish(id: Int!): Boolean!
+  createOrder(input: CreateOrderDto!): Order!
+  updateOrder(id: Int!, input: UpdateOrderDto!): Order!
+  removeOrder(id: Int!): Boolean!
+  createUser(input: CreateUserDto!): User!
+  updateUser(id: Int!, input: UpdateUserDto!): User!
+  removeUser(id: Int!): Boolean!
+  createReview(input: CreateReviewDto!): Review!
+  updateReview(id: Int!, input: UpdateReviewDto!): Review!
+  removeReview(id: Int!): Boolean!
+  createReservation(input: CreateReservationDto!): Reservation!
+  updateReservation(id: Int!, input: UpdateReservationDto!): Reservation!
+  removeReservation(id: Int!): Boolean!
+}
+
+input CreateDishDto {
+  """Название блюда"""
+  name: String!
+
+  """Количество белков"""
+  protein: Int!
+
+  """Количество жиров"""
+  fat: Int!
+
+  """Количество углеводов"""
+  carbohydrates: Int!
+
+  """Цена блюда в рублях"""
+  price: Int!
+
+  """Масса блюда в граммах"""
+  grams: Int!
+}
+
+input UpdateDishDto {
+  name: String
+  protein: Int
+  fat: Int
+  carbohydrates: Int
+  price: Int
+  grams: Int
+}
+
+input CreateOrderDto {
+  """ID пользователя, который оформляет заказ"""
+  authorId: Int!
+
+  """Массив ID блюд, включённых в заказ"""
+  dishIds: [Int!]!
+}
+
+input UpdateOrderDto {
+  """ID пользователя, который оформляет заказ"""
+  authorId: Int!
+
+  """Массив ID блюд, включённых в заказ"""
+  dishIds: [Int!]!
+}
+
+input CreateUserDto {
+  """Имя пользователя"""
+  firstName: String!
+
+  """Фамилия пользователя"""
+  lastName: String!
+
+  """Роль пользователя"""
+  role: UserRole!
+}
+
+input UpdateUserDto {
+  """Имя пользователя"""
+  firstName: String!
+
+  """Фамилия пользователя"""
+  lastName: String!
+
+  """Роль пользователя"""
+  role: UserRole!
+}
+
+input CreateReviewDto {
+  """Содержимое отзыва"""
+  content: String!
+
+  """ID автора отзыва"""
+  author: Int!
+}
+
+input UpdateReviewDto {
+  """Содержимое отзыва"""
+  content: String!
+}
+
+input CreateReservationDto {
+  """ID пользователя, который делает бронь"""
+  userId: Int!
+
+  """Номер стола, который бронируется"""
+  tableNumber: Int!
+
+  """Дата и время бронирования в формате ISO 8601"""
+  reservationTime: String!
+}
+
+input UpdateReservationDto {
+  """ID пользователя, который делает бронь"""
+  userId: Int!
+
+  """Номер стола, который бронируется"""
+  tableNumber: Int!
+
+  """Дата и время бронирования в формате ISO 8601"""
+  reservationTime: DateTime!
+}

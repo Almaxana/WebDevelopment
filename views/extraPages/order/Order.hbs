@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+{{> head
+  title="Menu"
+  styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                 <link rel="stylesheet" href="../../extraPagesCSS/Menu.css">'
+  description="Меню ресторана европейской кухни в Санкт-Петербурге MyRest"
+  keywords="Меню, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+  scripts='<script src="../../JS/GetActiveElement.js"></script>
+          <script src="../../JS/Order/OrderDelete.js" defer></script>'
+}}
+<body class="page">
+{{> header }}
+<main class="main-content">
+  {{> userOptionList }}
+  <section class="main-content__menu_table" >
+    <table class="main-content__menu_table">
+      <caption class="menu__title">Меню</caption>
+      <thead class="menu__header">
+      <tr class="menu__row">
+        <th class="menu__item menu__column-header">Блюдо</th>
+        <th  class="menu__item menu__column-header">Белки</th>
+        <th  class="menu__item menu__column-header">Жиры</th>
+        <th  class="menu__item menu__column-header">Углеводы</th>
+        <th  class="menu__item menu__column-header">Граммы</th>
+        <th  class="menu__item menu__column-header">Цена</th>
+
+      </tr>
+      </thead>
+      <tbody class="menu__body">
+      {{#each order.dishes}}
+        <tr class="menu__row">
+          <td class="menu__item menu__row-header"><a href="/dish/{{this.id}}">{{ this.name }}</a></td>
+          <td class="menu__item">{{ this.protein }}</td>
+          <td class="menu__item">{{ this.fat }}</td>
+          <td class="menu__item">{{ this.carbohydrates }}</td>
+          <td class="menu__item">{{ this.grams }}</td>
+          <td class="menu__item">{{ this.price }}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+
+    </table>
+    <section class="order_author">
+      Автор: <a href="/user/{{order.author.id }}">{{order.author.id }}</a>
+    </section>
+    <button class="dish_button" type="button">
+      <a href="/order/update/{{ order.id }}">Изменить</a>
+    </button>
+    <button id="deleteButton" class="dish_button" type="button" data-id="{{ order.id }}">
+      <a href="/order/all">Удалить</a>
+    </button>
+  </section>
+</main>
+{{> footer }}
+</body>
+</html>

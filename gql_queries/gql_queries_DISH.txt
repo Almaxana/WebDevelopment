@@ -1,0 +1,75 @@
+Dish
+
+mutation CreateDish {
+  createDish(input: {
+    name: "Chicken",
+    protein: 5,
+    fat: 12,
+    carbohydrates: 35,
+    price: 100,
+    grams: 200
+  }) {
+    id
+    name
+    protein
+    fat
+    carbohydrates
+    price
+    grams
+  }
+}
+
+query GetAllDishes {
+  dishes {
+    id
+    name
+    price
+  }
+}
+
+query GetDish {
+  dish(id: 19) {
+    id
+    name
+    protein
+    fat
+    carbohydrates
+    price
+    grams
+  }
+}
+
+mutation UpdateDish {
+  updateDish(
+    id: 19,
+    input: {
+      name: "New name",
+      protein: 5,
+      fat: 12,
+      carbohydrates: 35,
+      price: 100,
+      grams: 100
+  }
+  ) {
+    id
+    name
+    price
+    grams
+  }
+}
+
+mutation DeleteDish {
+  removeDish(id: 1)
+}
+
+query GetPaginatedDishes {
+  dishesPaginated(page: 1, limit: 5) {
+    data {
+      id
+      name
+      price
+    }
+    total
+  }
+}
+

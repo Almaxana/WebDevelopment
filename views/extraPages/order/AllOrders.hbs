@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+{{> head
+  title="AllOrders"
+  styleSheets='<link rel="stylesheet" href="../../CSS/BrowserReset.css">
+                 <link rel="stylesheet" href="../../extraPagesCSS/Menu.css">'
+  description="Меню ресторана европейской кухни в Санкт-Петербурге MyRest"
+  keywords="Меню, MyRest, ресторан, еда, европейская кухня, Мишлен, Санкт-Петербург, вкусно поесть"
+  scripts='<script src="../../JS/GetActiveElement.js"></script>'
+}}
+<body class="page">
+{{> header }}
+<main class="main-content">
+  {{> userOptionList }}
+  <section class="main-content__menu_table" >
+    <table class="main-content__menu_table">
+      <caption class="menu__title">Все заказы</caption>
+      <thead class="menu__header">
+      <tr class="menu__row">
+        <th class="menu__item menu__column-header">Номер заказа</th>
+        <th  class="menu__item menu__column-header">Владелец</th>
+        <th  class="menu__item menu__column-header">Статус</th>
+        <th  class="menu__item menu__column-header">Дата создания</th>
+      </tr>
+      </thead>
+      <tbody class="menu__body">
+      {{#each orders}}
+        <tr class="menu__row">
+          <td class="menu__item menu__row-header"><a href="/order/{{this.id}}">{{ this.id }}</a></td>
+          <td class="menu__item"><a href="/user/{{ this.author.id }}">{{ this.author.id }}</a></td>
+          <td class="menu__item">{{ this.status }}</td>
+          <td class="menu__item">{{ this.createdAt }}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+
+    </table>
+    <button class="dish_button" type="button">
+      <a href="/order/create">Создать заказ</a>
+    </button>
+  </section>
+</main>
+{{> footer }}
+</body>
+</html>
